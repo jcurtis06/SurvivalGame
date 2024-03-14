@@ -1,15 +1,32 @@
-[gd_scene load_steps=23 format=3 uid="uid://bb3gamks5fwxe"]
+[gd_scene load_steps=29 format=3 uid="uid://bb3gamks5fwxe"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_rd258"]
 [ext_resource type="Texture2D" uid="uid://cdv5i408odlsr" path="res://sprites/player/player_idle.png" id="1_rsmkw"]
 [ext_resource type="Texture2D" uid="uid://dj30wmn6to4in" path="res://sprites/player/player_walk.png" id="2_5rs87"]
 [ext_resource type="Resource" uid="uid://dinjwn8vl7k6m" path="res://resources/inventory/player.tres" id="2_ask1g"]
+[ext_resource type="Texture2D" uid="uid://b6cyq0a3qkvat" path="res://sprites/player/attack.png" id="3_4bt2t"]
 [ext_resource type="Script" path="res://entities/player/interaction_manager.gd" id="4_4taw3"]
 [ext_resource type="Script" path="res://resources/inventory/inventory_ui.gd" id="6_51grn"]
 [ext_resource type="PackedScene" uid="uid://rk0i4ngkopr4" path="res://scenes/inventory/inventory_slot.tscn" id="6_j45eq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1f2ge"]
 size = Vector2(6, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsksm"]
+atlas = ExtResource("3_4bt2t")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf5ve"]
+atlas = ExtResource("3_4bt2t")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bx3wl"]
+atlas = ExtResource("3_4bt2t")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6o7d"]
+atlas = ExtResource("3_4bt2t")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8s7g0"]
 atlas = ExtResource("1_rsmkw")
@@ -63,6 +80,23 @@ region = Rect2(96, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_tsksm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf5ve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bx3wl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6o7d")
+}],
+"loop": false,
+"name": &"attack_right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_8s7g0")
 }, {
 "duration": 1.0,
@@ -86,7 +120,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1c1jh")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -103,13 +137,16 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nb07d")
 }],
-"loop": true,
+"loop": false,
 "name": &"walk_right",
 "speed": 5.0
 }]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u26jc"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0dmw"]
+size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_rd258")
@@ -122,10 +159,11 @@ shape = SubResource("RectangleShape2D_1f2ge")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_2uw8q")
-animation = &"walk_right"
+animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
+position_smoothing_speed = 20.0
 
 [node name="InteractionManager" type="Node2D" parent="."]
 script = ExtResource("4_4taw3")
@@ -203,4 +241,11 @@ layout_mode = 2
 [node name="InventorySlot9" parent="InventoryUI/Hotbar/BG/GridContainer" instance=ExtResource("6_j45eq")]
 layout_mode = 2
 
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(11, -1)
+shape = SubResource("RectangleShape2D_g0dmw")
+
 [connection signal="inventory_toggled" from="." to="InventoryUI" method="_on_player_inventory_toggled"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

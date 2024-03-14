@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dunmqhockcinp"]
+
+[ext_resource type="Script" path="res://entities/dummy/dummy.gd" id="1_nnb78"]
+[ext_resource type="Texture2D" uid="uid://saswvhqrmkei" path="res://entities/dummy/farm_props.png" id="2_qqjgc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gddvl"]
+size = Vector2(8, 8)
+
+[node name="Dummy" type="CharacterBody2D"]
+script = ExtResource("1_nnb78")
+health = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gddvl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_qqjgc")
+region_enabled = true
+region_rect = Rect2(76, 48, 11, 15)

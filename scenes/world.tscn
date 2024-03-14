@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bs2sxg0cwp314"]
+[gd_scene load_steps=13 format=3 uid="uid://bs2sxg0cwp314"]
 
 [ext_resource type="Texture2D" uid="uid://tevh1pyxowe6" path="res://sprites/world/plains.png" id="1_tnum5"]
 [ext_resource type="PackedScene" uid="uid://bb3gamks5fwxe" path="res://entities/player/player.tscn" id="2_0hgiy"]
 [ext_resource type="Script" path="res://scenes/world.gd" id="2_f4koy"]
 [ext_resource type="Texture2D" uid="uid://dbbysmn6ji7lg" path="res://sprites/world/props.png" id="2_rcd1h"]
 [ext_resource type="Script" path="res://scripts/tile_indicator.gd" id="5_f1si1"]
+[ext_resource type="PackedScene" uid="uid://dunmqhockcinp" path="res://entities/dummy/dummy.tscn" id="6_88rno"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4d3ew"]
 texture = ExtResource("1_tnum5")
@@ -2180,6 +2181,9 @@ libraries = {
 
 [node name="Player" parent="." instance=ExtResource("2_0hgiy")]
 position = Vector2(154, 91)
+
+[node name="Dummy" parent="." instance=ExtResource("6_88rno")]
+position = Vector2(209, 93)
 
 [connection signal="block_destroyed" from="Player" to="World" method="_on_player_block_destroyed"]
 [connection signal="block_placed" from="Player" to="World" method="_on_player_block_placed"]

@@ -1,5 +1,5 @@
 # the player
-extends CharacterBody2D
+extends Entity
 class_name Player
 
 signal block_placed(position: Vector2, block: Block)
@@ -14,8 +14,10 @@ signal inventory_toggled(open: bool)
 @export var current_item: InvItem
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var hitbox: Area2D = $Hitbox
 
 var inventory_open = false
+var attacking = false
 
 func _physics_process(delta: float) -> void:
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -26,10 +28,11 @@ func _physics_process(delta: float) -> void:
 	elif velocity.x > 0:
 		sprite.flip_h = false
 	
-	if velocity == Vector2.ZERO:
-		sprite.play("idle")
-	else:
-		sprite.play("walk_right")
+	if !attacking:
+		if velocity == Vector2.ZERO:
+			sprite.play("idle")
+		else:
+			sprite.play("walk_right")
 	
 	move_and_slide()
 
@@ -40,6 +43,17 @@ func _process(delta: float) -> void:
 		inventory_open = !inventory_open
 		current_item = null
 		inventory_toggled.emit(inventory_open)
+	
+	if Input.is_action_just_pressed("destroy"):
+		_attack()
+
+func _attack():
+	sprite.play("attack_right")
+	attacking = true
+	
+	for n in hitbox.get_overlapping_bodies():
+		if n is Entity && n != self:
+			n.take_damage(5)
 
 func _manage_hotbar_slot() -> void:
 	var prev_item = current_item
@@ -65,3 +79,7 @@ func _manage_hotbar_slot() -> void:
 	
 	if prev_item != current_item:
 		hand_changed.emit(current_item, prev_item)
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if sprite.animation == "attack_right":
+		attacking = false
