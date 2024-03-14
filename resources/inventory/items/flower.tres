@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=6 format=3 uid="uid://bjudncysgguxa"]
+
+[ext_resource type="Script" path="res://resources/block/block.gd" id="1_178qt"]
+[ext_resource type="Script" path="res://resources/inventory/items/inventory_item.gd" id="2_ocjja"]
+[ext_resource type="Texture2D" uid="uid://dbbysmn6ji7lg" path="res://sprites/world/props.png" id="2_tpsy4"]
+
+[sub_resource type="Resource" id="Resource_l0q1x"]
+script = ExtResource("1_178qt")
+atlas_src = 1
+atlas_coords = Vector2i(10, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_poo3i"]
+atlas = ExtResource("2_tpsy4")
+region = Rect2(81, 73, 7, 6)
+
+[resource]
+script = ExtResource("2_ocjja")
+name = "Flower"
+texture = SubResource("AtlasTexture_poo3i")
+block = SubResource("Resource_l0q1x")

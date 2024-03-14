@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://g5sf3rd8upyu"]
+
+[ext_resource type="Texture2D" uid="uid://dbbysmn6ji7lg" path="res://sprites/world/props.png" id="1_72t4l"]
+[ext_resource type="Script" path="res://resources/scene_block/tree.gd" id="1_clc3l"]
+[ext_resource type="Texture2D" uid="uid://d36rhar5xm7lk" path="res://sprites/plants.png" id="2_225h6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fw8s4"]
+atlas = ExtResource("1_72t4l")
+region = Rect2(155, 3, 21, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n70oe"]
+atlas = ExtResource("2_225h6")
+region = Rect2(56, 64, 8, 8)
+
+[node name="Tree" type="Node2D"]
+script = ExtResource("1_clc3l")
+full_grown_texture = SubResource("AtlasTexture_fw8s4")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_n70oe")
+centered = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

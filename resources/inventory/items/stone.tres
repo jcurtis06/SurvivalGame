@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=5 format=3 uid="uid://jneoliq4l4vj"]
+
+[ext_resource type="Resource" uid="uid://opg5dmyq7a5y" path="res://resources/block/stone.tres" id="1_ehlko"]
+[ext_resource type="Script" path="res://resources/inventory/items/inventory_item.gd" id="2_fntmm"]
+[ext_resource type="Texture2D" uid="uid://tevh1pyxowe6" path="res://sprites/world/plains.png" id="2_hiq52"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8h0t3"]
+atlas = ExtResource("2_hiq52")
+region = Rect2(104, 32, 8, 8)
+
+[resource]
+script = ExtResource("2_fntmm")
+name = "Stone"
+texture = SubResource("AtlasTexture_8h0t3")
+block = ExtResource("1_ehlko")

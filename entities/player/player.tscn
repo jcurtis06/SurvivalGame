@@ -1,9 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://bb3gamks5fwxe"]
+[gd_scene load_steps=23 format=3 uid="uid://bb3gamks5fwxe"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_rd258"]
 [ext_resource type="Texture2D" uid="uid://cdv5i408odlsr" path="res://sprites/player/player_idle.png" id="1_rsmkw"]
 [ext_resource type="Texture2D" uid="uid://dj30wmn6to4in" path="res://sprites/player/player_walk.png" id="2_5rs87"]
+[ext_resource type="Resource" uid="uid://dinjwn8vl7k6m" path="res://resources/inventory/player.tres" id="2_ask1g"]
 [ext_resource type="Script" path="res://entities/player/interaction_manager.gd" id="4_4taw3"]
+[ext_resource type="Script" path="res://resources/inventory/inventory_ui.gd" id="6_51grn"]
+[ext_resource type="PackedScene" uid="uid://rk0i4ngkopr4" path="res://scenes/inventory/inventory_slot.tscn" id="6_j45eq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1f2ge"]
 size = Vector2(6, 7)
@@ -105,8 +108,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u26jc"]
+bg_color = Color(1, 1, 1, 1)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_rd258")
+inventory = ExtResource("2_ask1g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
@@ -122,3 +129,78 @@ zoom = Vector2(1.5, 1.5)
 
 [node name="InteractionManager" type="Node2D" parent="."]
 script = ExtResource("4_4taw3")
+
+[node name="InventoryUI" type="CanvasLayer" parent="."]
+script = ExtResource("6_51grn")
+player_inventory = ExtResource("2_ask1g")
+
+[node name="Hotbar" type="Control" parent="InventoryUI"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="BG" type="Panel" parent="InventoryUI/Hotbar"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -41.0
+offset_top = -10.0
+offset_right = 41.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u26jc")
+
+[node name="GridContainer" type="GridContainer" parent="InventoryUI/Hotbar/BG"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -4.0
+offset_right = 40.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+columns = 9
+
+[node name="InventorySlot" parent="InventoryUI/Hotbar/BG/GridContainer" instance=ExtResource("6_j45eq")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="InventoryUI/Hotbar/BG/GridContainer" instance=ExtResource("6_j45eq")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="InventoryUI/Hotbar/BG/GridContainer" instance=ExtResource("6_j45eq")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="InventoryUI/Hotbar/BG/GridContainer" instance=ExtResource("6_j45eq")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="InventoryUI/Hotbar/BG/GridContainer" instance=ExtResource("6_j45eq")]
+layout_mode = 2
+
+[node name="InventorySlot6" parent="InventoryUI/Hotbar/BG/GridContainer" instance=ExtResource("6_j45eq")]
+layout_mode = 2
+
+[node name="InventorySlot7" parent="InventoryUI/Hotbar/BG/GridContainer" instance=ExtResource("6_j45eq")]
+layout_mode = 2
+
+[node name="InventorySlot8" parent="InventoryUI/Hotbar/BG/GridContainer" instance=ExtResource("6_j45eq")]
+layout_mode = 2
+
+[node name="InventorySlot9" parent="InventoryUI/Hotbar/BG/GridContainer" instance=ExtResource("6_j45eq")]
+layout_mode = 2
+
+[connection signal="inventory_toggled" from="." to="InventoryUI" method="_on_player_inventory_toggled"]

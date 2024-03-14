@@ -6,14 +6,14 @@ class_name InteractionManager
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
-		if player.current_block != null:
+		if player.current_item.block != null:
 			_build()
 	if Input.is_action_just_pressed("destroy"):
 		_destroy()
 
 func _build() -> void:
 	var pos = get_global_mouse_position()
-	player.block_placed.emit(pos, player.current_block)
+	player.block_placed.emit(pos, player.current_item.block)
 
 func _destroy() -> void:
 	var pos = get_global_mouse_position()

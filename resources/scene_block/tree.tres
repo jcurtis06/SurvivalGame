@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SceneBlock" load_steps=3 format=3 uid="uid://bt7lgdrl0l0qn"]
+
+[ext_resource type="Script" path="res://resources/scene_block/scene_block.gd" id="1_eytfx"]
+[ext_resource type="PackedScene" uid="uid://g5sf3rd8upyu" path="res://resources/scene_block/tree.tscn" id="1_kqysv"]
+
+[resource]
+script = ExtResource("1_eytfx")
+scene = ExtResource("1_kqysv")
+atlas_src = 0
+atlas_coords = Vector2i(0, 0)

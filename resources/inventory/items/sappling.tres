@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=5 format=3 uid="uid://c4yam8gyu5bna"]
+
+[ext_resource type="Resource" uid="uid://bt7lgdrl0l0qn" path="res://resources/scene_block/tree.tres" id="1_2lcdg"]
+[ext_resource type="Script" path="res://resources/inventory/items/inventory_item.gd" id="2_24tqc"]
+[ext_resource type="Texture2D" uid="uid://d36rhar5xm7lk" path="res://sprites/plants.png" id="3_1vhel"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8h0t3"]
+atlas = ExtResource("3_1vhel")
+region = Rect2(56, 64, 8, 8)
+
+[resource]
+script = ExtResource("2_24tqc")
+name = "Sappling"
+texture = SubResource("AtlasTexture_8h0t3")
+block = ExtResource("1_2lcdg")
