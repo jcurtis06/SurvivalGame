@@ -1,9 +1,9 @@
 [gd_scene load_steps=19 format=3 uid="uid://bb3gamks5fwxe"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_rd258"]
-[ext_resource type="Texture2D" uid="uid://cdv5i408odlsr" path="res://player_idle.png" id="1_rsmkw"]
-[ext_resource type="Texture2D" uid="uid://dj30wmn6to4in" path="res://player_walk.png" id="2_5rs87"]
-[ext_resource type="Script" path="res://interaction_manager.gd" id="4_2oopc"]
+[ext_resource type="Script" path="res://entities/player/player.gd" id="1_rd258"]
+[ext_resource type="Texture2D" uid="uid://cdv5i408odlsr" path="res://sprites/player/player_idle.png" id="1_rsmkw"]
+[ext_resource type="Texture2D" uid="uid://dj30wmn6to4in" path="res://sprites/player/player_walk.png" id="2_5rs87"]
+[ext_resource type="Script" path="res://entities/player/interaction_manager.gd" id="4_4taw3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1f2ge"]
 size = Vector2(6, 7)
@@ -121,4 +121,4 @@ animation = &"walk_right"
 zoom = Vector2(1.5, 1.5)
 
 [node name="InteractionManager" type="Node2D" parent="."]
-script = ExtResource("4_2oopc")
+script = ExtResource("4_4taw3")
